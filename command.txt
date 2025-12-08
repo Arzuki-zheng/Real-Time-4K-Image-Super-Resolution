@@ -1,0 +1,2 @@
+python ./code/test.py --input_path ./dataroot/testsets/{inputSet}/test/LR/ --output_path ./dataroot/testsets/{outputSet}/test/S
+R/ --checkpoint-id rt4ksr_x2 --scale 2 --arch rt4ksr_rep  --is-train

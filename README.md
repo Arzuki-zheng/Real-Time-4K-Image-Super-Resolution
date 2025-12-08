@@ -1,2 +1,9 @@
-# Real-Time-4K-Image-Super-Resolution
-Real-Time 4K Image Super-Resolution implementation for CV final project
+Real-Time-4K-Image-Super-Resolution
+
+電腦視覺期末專案
+組員:
+陳鉦元、7114056186
+李品嫻、7114056151
+洪維駿、7114056077
+洪慧珊、7114056078
+
