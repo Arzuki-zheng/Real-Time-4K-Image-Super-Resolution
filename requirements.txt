@@ -1,11 +1,20 @@
-opencv-python==4.6.0.66
-pillow==9.2.0
-scikit-image==0.19.3                
-timm==0.6.12
+# === Original (Failed on Python 3.13) ===
+# opencv-python==4.6.0.66
+# pillow==9.2.0
+# scikit-image==0.19.3
+# scipy==1.9.1
+# matplotlib==3.5.3
+# tqdm==4.64.0
+
+# === Streamlit Cloud Compatible ===
+streamlit
+torch
+torchvision
 numpy
+opencv-python-headless
+Pillow
+scikit-image
 scipy
-tqdm
-wandb
 matplotlib
-torchmetrics
-kornia
+tqdm
+
