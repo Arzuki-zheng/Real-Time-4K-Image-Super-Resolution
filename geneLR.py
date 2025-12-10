@@ -23,7 +23,7 @@ def downsample_to_lr(img_path, output_path, scale=2):
 
     img = cv2.imread(img_path, cv2.IMREAD_COLOR)
     if img is None:
-        print(f"⚠️ 讀取失敗：{img_path}")
+        print(f"讀取失敗：{img_path}")
         return
 
     h, w, _ = img.shape
@@ -67,7 +67,7 @@ def downsample_to_lr(img_path, output_path, scale=2):
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     cv2.imwrite(output_path, lr_img)
-    print(f"✅ 產生 LR x{scale}: {output_path}")
+    print(f"產生 LR x{scale}: {output_path}")
 
 def process_folder(input_folder, output_folder, scale=2):
     os.makedirs(output_folder, exist_ok=True)
