@@ -11,7 +11,17 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, '..'))
 
 st.title("RT4KSR Online Demo")
+st.subheader("電腦視覺期末專題 - Real-Time 4K Image Super-Resolution")
+st.write("""
+組員名單：
+    陳鉦元、7114056186
+    李品嫻、7114056151
+    洪維駿、7114056077
+    洪慧珊、7114056078
 
+本示範使用 [Real-Time 4K Image Super-Resolution] 可自行上傳圖片體驗模型效果。
+請上傳一張高解析度圖片 (HR)，系統會先將其降階成低解析度圖片 (LR)，再使用 RT4KSR 模型進行超解像 (SR)，最後顯示 SR 結果。
+""")
 # --- 側邊欄 ---
 scale = st.sidebar.selectbox("放大倍率", [2], index=0)
 uploaded_file = st.file_uploader("上傳圖片", type=["jpg", "png", "jpeg"])
@@ -52,18 +62,29 @@ if uploaded_file is not None:
                 st.success("LR 產生成功")
                 st.image(lr_file, caption="LR 輸入", width=300)
 
-        # 3. 執行 code/test.py
+                # 3. 執行 code/test.py
         cmd_test = [
             sys.executable, "code/test.py",
-            "--input", lr_dir,
-            "--output", sr_dir,
+            
+            # 根據報錯修正：原本寫 --input 改成 --input_path
+            "--input_path", lr_dir,
+            
+            # 根據報錯修正：原本寫 --output 改成 --output_path
+            "--output_path", sr_dir,
+            
             "--scale", str(scale),
-            "--checkpoint", f"code/checkpoints/rt4ksr_x{scale}.pth",
+            
+            # 根據報錯修正：拆成 root 和 id
+            "--checkpoints-root", os.path.join(PROJECT_ROOT, "code", "checkpoints"),
+            "--checkpoint-id", f"rt4ksr_x{scale}",  # 這裡只給檔名 (不含 .pth)
+            
+            # 其他模型參數 (維持不變)
             "--feature-channels", "24",
             "--num-blocks", "4",
             "--act-type", "gelu",
             "--arch", "rt4ksr_rep"
         ]
+
         
         with st.spinner('AI 模型推論中...'):
             ret_test = subprocess.run(cmd_test, cwd=PROJECT_ROOT, capture_output=True, text=True)
